@@ -21,29 +21,7 @@ const getEventById = async (req, res) => {
   }
 };
 
-function createEvent(req, res) {
-  if (!req.body.name) {
-    return res.status(400).json({ error: 'Name is required' });
-  }
-
-  const event = new Event({
-    name: req.body.name,
-    date: req.body.date,
-    location: req.body.location,
-    description: req.body.description,
-    attendees: req.body.attendees
-  });
-
-  event.save()
-    .then(result => {
-      res.status(201).json(result);
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json({ error: err });
-    });
-}
-/*const createEvent = async (req, res) => {
+const createEvent = async (req, res) => {
   const event = new Event({
     name: req.body.name,
     date: req.body.date,
@@ -58,7 +36,7 @@ function createEvent(req, res) {
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
-};*/
+};
 
 const updateEvent = async (req, res) => {
   try {

@@ -2,6 +2,10 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
+const bp = require('body-parser');
+
+app.use(bp.json());
+app.use(bp.urlencoded({ extended: true }));
 
 // Connect to MongoDB database
 mongoose.connect(process.env.DB_URI, {
@@ -16,6 +20,7 @@ mongoose.connect(process.env.DB_URI, {
 //Import the routes
 const Routes = require('./routes');
 app.use('/', Routes);
+
 
 // Start server
 const port = process.env.PORT || 5500;

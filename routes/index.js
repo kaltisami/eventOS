@@ -29,9 +29,9 @@ TicketingController: for handling ticketing management endpoints
 */
 
 // EventController: for handling event creation and management endpoints
+router.post('/api/events', eventController.createEvent,eventController.logEvent);
 router.get('/api/events', eventController.getAllEvents);
 router.get('/api/events/:id', eventController.getEventById);
-router.post('/api/events', eventController.createEvent);
 router.put('/api/events/:id', eventController.updateEvent);
 router.delete('/api/events/:id', eventController.deleteEvent);
 

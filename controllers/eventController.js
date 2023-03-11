@@ -21,7 +21,30 @@ const getEventById = async (req, res) => {
   }
 };
 
-const createEvent = async (req, res) => {
+const createEvent = async (req, res, next) => {
+  const event = new Event({
+    name: req.body.name,
+    date: req.body.date,
+    venue: req.body.venue,
+    performers: req.body.performers,
+    description: req.body.description
+  });
+  try {
+    const newEvent = await event.save();
+    req.newEvent = newEvent; // store the new event in the request object
+    next(); // move to the next middleware function
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+};
+
+const logEvent = (req, res) => {
+  console.log(req.newEvent); // log the new event
+  res.status(201).json(req.newEvent); // send the response
+}
+
+
+/*const createEvent = async (req, res) => {
   const event = new Event({
     name: req.body.name,
     date: req.body.date,
@@ -33,10 +56,11 @@ const createEvent = async (req, res) => {
     const newEvent = await event.save();
     res.status(201).json(newEvent);
     console.log(json(newEvent));
+    next();
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
-};
+};*/
 
 const updateEvent = async (req, res) => {
   try {
@@ -74,5 +98,6 @@ module.exports = {
   getEventById,
   createEvent,
   updateEvent,
-  deleteEvent
+  deleteEvent,
+  logEvent
 };

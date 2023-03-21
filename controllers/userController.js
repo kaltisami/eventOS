@@ -19,13 +19,15 @@ const userController = {
   login: async (req, res) => {
     try {
       const { email, password } = req.body;
-      const user = await User.findByCredentials(email, password);
+      const user = await User.findOne({"email": email, "password":password});
       const token = await user.generateAuthToken();
       res.json({ user, token });
+      res.status(201).json({ message: 'User logged in successfully' });
     } catch (err) {
       res.status(400).json({ error: err.message });
     }
   },
+
 
   getAllUsers: async (req, res) => {
     try {

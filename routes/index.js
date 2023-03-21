@@ -29,6 +29,7 @@ TicketingController: for handling ticketing management endpoints
 */
 
 // EventController: for handling event creation and management endpoints
+// API TESTED
 router.post('/api/events', eventController.createEvent,eventController.logEvent);
 router.get('/api/events', eventController.getAllEvents);
 router.get('/api/events/:id', eventController.getEventById);
@@ -36,6 +37,7 @@ router.put('/api/events/:id', eventController.updateEvent);
 router.delete('/api/events/:id', eventController.deleteEvent);
 
 // UserController: for handling user authentication and management endpoints
+// API TESTED
 router.post('/api/auth/register', userController.register);
 router.post('/api/auth/login', userController.login);
 router.get('/api/users', userController.getAllUsers);
@@ -79,9 +81,10 @@ router.put('/api/performances/:id', performanceController.updatePerformance);
 router.delete('/api/performances/:id', performanceController.deletePerformance);
 
 // ArtistController
+// API TESTED
+router.post('/api/artists', artistController.createArtist);
 router.get('/api/artists', artistController.getAllArtists);
 router.get('/api/artists/:id', artistController.getArtistById);
-router.post('/api/artists', artistController.createArtist);
 router.put('/api/artists/:id', artistController.updateArtist);
 router.delete('/api/artists/:id', artistController.deleteArtist);
 
